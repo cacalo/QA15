@@ -1,6 +1,6 @@
 const Page = require('./page');
 
-class Products extends Page {
+class Inventory extends Page {
 
 	get page () { return "inventory.html"}
 	get url () { return super.url+this.page}
@@ -12,6 +12,8 @@ class Products extends Page {
 	get cartNumber () { return $('.shopping_cart_badge')}
 	get cartButton () { return $('.shopping_cart_link')}
 
+	addItemSelector (i=0) {	return $(this.add+this.items[i]) }
+	removeItemSelector (i=0) { return $(this.remove+this.items[i]) }
 
 	async addItem (i=0) {
 		let item = await $(this.add+this.items[i])
@@ -28,4 +30,4 @@ class Products extends Page {
 	}
 }
 
-module.exports = new Products();
+module.exports = new Inventory();

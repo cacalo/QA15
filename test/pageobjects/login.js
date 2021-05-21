@@ -5,7 +5,7 @@ class Login extends Page {
 	get inputUsername () { return $('#user-name') }
 	get inputPassword () { return $('#password') }
 	get btnSubmit () { return $('#login-button') }
-	//get errorText () { return $('.error-message-container h3') } no funciona no sé por qué
+	get errorText () { return $('.error-message-container h3') }
 	get loginErrorMessage () { return $("h3=Epic sadface: Username and password do not match any user in this service")}
 	get loggedOutInventoryErrorMessage () { return $("h3=Epic sadface: You can only access '/inventory.html' when you are logged in.")}
 

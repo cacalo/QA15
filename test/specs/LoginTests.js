@@ -1,5 +1,5 @@
 const Login = require('../pageobjects/login');
-const Products = require('../pageobjects/products');
+const Inventory = require('../pageobjects/inventory');
 
 
 describe('Login Tests', () => {
@@ -24,8 +24,7 @@ describe('Login Tests', () => {
 
 	it('Should login with valid credentials', async () => {
 		await Login.login();
-		//await expect(await browser).toHaveUrl(Products.url); //No funciona no sé por que.
-    await expect(await browser.getUrl()).toBe(Products.url);
+    await expect(await browser.getUrl()).toBe(Inventory.url);
 	});
 });
 

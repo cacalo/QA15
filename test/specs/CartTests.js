@@ -1,13 +1,14 @@
 const Login = require('../pageobjects/login');
-const Products = require('../pageobjects/products');
+const Inventory = require('../pageobjects/inventory');
+const Cart = require('../pageobjects/cart');
+const inventory = require('../pageobjects/inventory');
+
 
 
 describe('Cart Tests without login', () =>  {
-	it('Should not enter the products page if logged out', async () => {
-		await Products.open();
-		await expect(await Login.loggedOutInventoryErrorMessage).toExist();
-		await browser.pause(5000)
-		//await browser.close();
+	it('Should not enter the Inventory page if logged out', () => {
+		Inventory.open();
+		expect(Login.loggedOutInventoryErrorMessage).toExist();
 	});
 });
 
@@ -18,23 +19,38 @@ describe('Cart Tests with login', () =>  {
 	})
 
 	it('Add 3 items to cart', async () => {
-		await Products.addItem(0);
-		await Products.addItem(1);
-		await Products.addItem(4);
-		await browser.pause(500);
-		await expect(await (await Products.cartNumber).getText()).toBe("3");
+		await Inventory.addItem(0);
+		await Inventory.addItem(1);
+		await Inventory.addItem(4);
+		browser.pause(500);
+		await expect(await (await Inventory.cartNumber).getText()).toBe("3");
 	});
 
 	it('Remove 2 items from cart', async () => {
-		await Products.removeItem(0);
-		await Products.removeItem(1);
-		await browser.pause(500);
-		await expect(await (await Products.cartNumber).getText()).toBe("1");
+		await Inventory.removeItem(0);
+		await Inventory.removeItem(1);
+		browser.pause(500);
+		await expect(await (await Inventory.cartNumber).getText()).toBe("1");
 	});
 
-	it('Remove all from cart', async () => {
-		await Products.removeItem(4);
-		await browser.pause(500);
-		await expect(await (await Products.cartNumber).not.toExist()).toBe("1");
+	it('Remove all from cart', () => {
+		Inventory.removeItem(4);
+		browser.pause(500);
+		expect(Inventory.cartButton).not.toHaveChildren();
+	});
+
+	it('3 items added to cart are present in cart', () => {
+		Inventory.addItem(0);
+		Inventory.addItem(1);
+		Inventory.addItem(4);
+		browser.pause(1000);
+		Inventory.cartButton.click();
+		browser.pause(1000);
+		expect(Cart.cartItems.length).toBe(3)
+	});
+	it('Remove an item in cart and return to inventory to check if the change propagated', () => {
+		Inventory.removeItem(1);
+		Cart.returnButton.click();
+		expect(inventory.addItemSelector(1)).toExist();
 	});
 });
