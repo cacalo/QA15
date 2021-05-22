@@ -10,20 +10,23 @@ describe('Hamburguer Menu Tests', () => {
 	})
 
 	it("The hamburger menu should appear hidden", () => {
-		expect(HamburgerMenu.hamburgerMenuWrapper).toHaveAttr("transform","translate3d(-100%, 0px, 0px)")
+		expect(HamburgerMenu.hamburgerMenuWrapper).toHaveAttr("hidden")
 	});
 
 	it("The hamburger icon should open the hamburger menu", () => {
 		HamburgerMenu.hamburgerOpenButton.click();
-		expect(HamburgerMenu.hamburgerMenuWrapper).not.toHaveAttr("aria-hidden","false")
+		browser.pause(1000);
+		expect(HamburgerMenu.hamburgerMenuWrapper).not.toHaveAttr("hidden")
 	});
 
 	it("The hamburger menu X button should close the hamburger menu", () => {
 		HamburgerMenu.hamburgerCloseButton.click();
-		expect(HamburgerMenu.hamburgerMenuWrapper).toHaveAttr("aria-hidden","true")
+		expect(HamburgerMenu.hamburgerMenuWrapper).toHaveAttr("hidden")
 	});
 
 	it('"All items" link should go to the inventory', () => {
+		HamburgerMenu.hamburgerOpenButton.click();
+		browser.pause(1000)
 		HamburgerMenu.allItemsButton.click();
 		expect(browser.getUrl()).toBe(Inventory.url)
 	});
@@ -35,7 +38,7 @@ describe('Hamburguer Menu Tests', () => {
 	it('"Reset app state" button should remove everything from the cart', () => {
 		Inventory.addItem(0);
 		Inventory.addItem(1);
-		browser.pause(500);
+		browser.pause(1000);
 		HamburgerMenu.resetAppButton.click();
 		expect(Inventory.cartButton).not.toHaveChildren();
 	});

@@ -8,7 +8,7 @@ const inventory = require('../pageobjects/inventory');
 describe('Cart Tests without login', () =>  {
 	it('Should not enter the Inventory page if logged out', () => {
 		Inventory.open();
-		expect(Login.loggedOutInventoryErrorMessage).toExist();
+		expect(Login.errorText).toHaveText("Epic sadface: You can only access '/inventory.html' when you are logged in.");
 	});
 });
 

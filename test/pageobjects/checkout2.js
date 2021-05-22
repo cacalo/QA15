@@ -33,9 +33,8 @@ class Checkout2 extends Page {
 		prices.forEach(price => {
 			const parsedPrice = parseFloat(price.getText().slice(1))
 			total += parsedPrice;
-		console.log("El total es " + total)
-		return total;
 		});
+		return total;
 	}
 
 	open () {

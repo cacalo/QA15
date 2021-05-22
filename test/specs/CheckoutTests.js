@@ -27,18 +27,18 @@ describe('Cart Tests with login', () =>  {
 		Checkout1.getToCheckout();
 	})
 
-	/*it('Continue without completing first name', () => {
+	it('Continue without completing first name', () => {
 		Checkout1.completeFields("","User","3200")
 		expect(Checkout1.errorText).toHaveText("Error: First Name is required")
-	});*/
+	});
 	it('Continue without completing last name', () => {
 		Checkout1.completeFields("Test","","3200")
 		expect(Checkout1.errorText).toHaveText("Error: Last Name is required")
 	});
-	/*it('Continue without completing zip code', () => {
+	it('Continue without completing zip code', () => {
 		Checkout1.completeFields("Test","User","")
 		expect(Checkout1.errorText).toHaveText("Error: Postal Code is required")
-	});*/
+	});
 	it('Continue successfully to checkout 2', () => {
 		Checkout1.completeFields("Test","User","32X0")
 		expect(browser).toHaveUrl(Checkout2.url)
@@ -56,7 +56,6 @@ describe('Cart Tests with login', () =>  {
 			expect(Checkout2.prices.length).toBe(parseInt(Inventory.cartNumber.getText()))
 		});
 		it('Check that "Item total" is correct', () => {
-			console.log(Checkout2.sumProductsPrices() + " AAAAAAAAAAAAAA")
 			expect(Checkout2.subtotal).toEqual(Checkout2.sumProductsPrices())
 		});
 		it('Check that "Tax" is correct', () => {

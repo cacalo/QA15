@@ -7,7 +7,8 @@ class Login extends Page {
 	get btnSubmit () { return $('#login-button') }
 	get errorText () { return $('.error-message-container h3') }
 	get loginErrorMessage () { return $("h3=Epic sadface: Username and password do not match any user in this service")}
-	get loggedOutInventoryErrorMessage () { return $("h3=Epic sadface: You can only access '/inventory.html' when you are logged in.")}
+	get loginEmptyUsernameMessage () { return $("h3=Epic sadface: Username is required")}
+	get loginEmptyPasswordMessage () { return $("h3=Epic sadface: Password is required")}
 
 
 	get correctUsername () { return "standard_user" }

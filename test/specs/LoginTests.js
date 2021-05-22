@@ -22,6 +22,18 @@ describe('Login Tests', () => {
 	  (await Login.loginErrorMessage).waitForDisplayed({ timeout: 1000 });
 	});
 
+	it('Should not login with invalid credentials: Empty username and right password', async () => {
+		await (await Login.inputUsername).clearValue();
+		await (await Login.inputPassword).setValue("anyPassword");
+	  (await Login.loginEmptyUsernameMessage).waitForDisplayed({ timeout: 1000 });
+	});
+
+	it('Should not login with invalid credentials: Right username and empty password', async () => {
+		await (await Login.inputUsername).setValue("anyUsername");
+		await (await Login.inputPassword).clearValue();
+	  (await Login.loginEmptyPasswordMessage).waitForDisplayed({ timeout: 1000 });
+	});
+
 	it('Should login with valid credentials', async () => {
 		await Login.login();
     await expect(await browser.getUrl()).toBe(Inventory.url);
