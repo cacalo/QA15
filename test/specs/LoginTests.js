@@ -34,6 +34,11 @@ describe('Login Tests', () => {
 	  (await Login.loginEmptyPasswordMessage).waitForDisplayed({ timeout: 1000 });
 	});
 
+	it('Should not login a locked out user', async () => {
+		await Login.login('locked_out_user', undefined);
+	  (await Login.loginLockedUser).waitForDisplayed({ timeout: 1000 });
+	});
+
 	it('Should login with valid credentials', async () => {
 		await Login.login();
     await expect(await browser.getUrl()).toBe(Inventory.url);

@@ -9,6 +9,7 @@ class Login extends Page {
 	get loginErrorMessage () { return $("h3=Epic sadface: Username and password do not match any user in this service")}
 	get loginEmptyUsernameMessage () { return $("h3=Epic sadface: Username is required")}
 	get loginEmptyPasswordMessage () { return $("h3=Epic sadface: Password is required")}
+	get loginLockedUser () { return $("h3=Epic sadface: Sorry, this user has been locked out.")}
 
 
 	get correctUsername () { return "standard_user" }
